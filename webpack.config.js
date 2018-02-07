@@ -1,5 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: path.join(__dirname, 'index.html'),
+  filename: 'index.html',
+  inject: 'body'
+});
 
 module.exports = {
   entry: './index.js',
@@ -8,6 +13,13 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
   },
   module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader : 'babel-loader'
+      },
+    ],
     rules: [
       {
         test: /\.js$/,
@@ -15,12 +27,19 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['eslint-loader']
+      },
+      {
         test: /\.css$/,
         use: ['style-loader'],
       },
+      {
+        test:/\.(s*)css$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin()
-  ],
+  plugins: [HtmlWebpackPluginConfig],
 };
