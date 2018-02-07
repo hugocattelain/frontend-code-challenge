@@ -17,33 +17,31 @@ class AdvertCard extends Component {
 
   render(){
     const ad = this.props.advertisement;
-    const thumbnail = ad.advertisementAssets.advertisementThumbnails.thumb_xs.url;
-    //eslint-disable-next-line
-    //console.log(thumbnail);
+    const thumbnail = ad.advertisementAssets.advertisementThumbnails.inventory_m.url || ad.advertisementAssets.advertisementThumbnails.thumb_xs.url || '';
+
     return(
       <MuiThemeProvider>
         <Card className="card__container">
-          <FlatButton className="card__button" label="Action1" />
+          <FlatButton className="card__button" label={ad.advertisementPrice.sellPrice ? 'Kaufen' : 'Mieten'} />
           <CardMedia className="card__media">
             <img src={thumbnail} alt="" />
           </CardMedia>
           <CardText className="card__text-summary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+            {ad.title.length > 55 ? ad.title.substring(0,55)+'-' : ad.title}
           </CardText>
           <CardText className="card__text-location" color="#cecece">
-            35764 Sinn / Fleisbach
+            {ad.realestateSummary.address.postalCode} {ad.realestateSummary.address.city} / {ad.realestateSummary.address.street}
           </CardText>
           <CardActions>
-          <CardText className="card__text-price">
-            1.954€
-          </CardText>
-          <CardText className="card__text-rooms">
-            3 Zimmer
-          </CardText>
-          <CardText className="card__text-size">
-            ab 35 m²
-          </CardText>
+            <CardText className="card__text-price">
+              {parseInt( ad.advertisementPrice.sellPrice ).toLocaleString() || parseInt( ad.advertisementPrice.baseRent ).toLocaleString()} €
+            </CardText>
+            <CardText className="card__text-size">
+              ab {Math.round(ad.realestateSummary.space)} m²
+            </CardText>
+            <CardText className="card__text-rooms">
+              {ad.realestateSummary.numberOfRooms} Zimmer
+            </CardText>
           </CardActions>
         </Card>
       </MuiThemeProvider>

@@ -1,9 +1,10 @@
 
 
 .card__container{
-  max-width: 480px;
-  height: 615px;
-  display: inline-block;
+  width: 480px;
+  height: 500px;
+  display: block;
+  margin: 15px auto 15px auto;
 }
 
 .card__button{
@@ -12,26 +13,30 @@
   z-index: 9;
   background-color: white !important;
   color: #cecece !important;
+
+  &:hover{
+    color: #000000 !important;
+  }
 }
 
-.card-media{
-  background-color: transparent !important;
-}
 .card__text{
   margin: 0px !important;
 
   &-summary{
     padding: 50px 50px 0 50px !important;
-    font-size: 25px !important;
+    font-size: 20px !important;
+    font-weight: bold;
+    height: 120px;
   }
 
   &-location{
-    font-size: 20px !important;
+    font-size: 16px !important;
     font-weight: bold;
-    padding: 20px 0 0 50px !important;
+    padding: 10px 0 0 50px !important;
   }
 
   &-price{
+    position: absolute;
     font-weight: bold;
     font-size: 20px !important;
     padding: 30px 0 0 42px !important;
@@ -39,23 +44,18 @@
 
   &-rooms{
     font-size: 20px !important;
-    position: relative;
-    bottom: 33px;
-    right: 135px;
     float: right;
-    border-right: 1px solid #e8e8e8;
-    height: 14px;
+    height: 0;
+    margin-top: 27px;
     line-height: 14px;
   }
 
   &-size{
+    border-left: 1px solid #e8e8e8;
     font-size: 20px !important;
-    position: relative;
-    bottom: 33px;
-    left: 100px;
     float: right;
     height: 14px;
-    line-height: 14px;
-
+    line-height: 0;
+    margin-top: 32px;
   }
 }
